@@ -6,6 +6,8 @@
 "fw_led_zapfsaeule\time_handler.o"
 "fw_led_zapfsaeule\uart_handler.o"
 "fw_led_zapfsaeule\ws2812.o"
+"fw_led_zapfsaeule\ws2812_spi.o"
+"fw_led_zapfsaeule\light_handler.o"
 "fw_led_zapfsaeule\main.o"
 "fw_led_zapfsaeule\gpio.o"
 "fw_led_zapfsaeule\i2c.o"

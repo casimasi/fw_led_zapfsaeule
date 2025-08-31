@@ -425,6 +425,16 @@
               <FileType>1</FileType>
               <FilePath>..\source\WS2812.c</FilePath>
             </File>
+            <File>
+              <FileName>ws2812_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\ws2812_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>light_handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\light_handler.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
