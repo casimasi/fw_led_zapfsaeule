@@ -11,39 +11,20 @@
 #include "uart_handler.h"
 
 
-uint32_t timebase_10us = 0;
+uint32_t timebase_1ms = 0;
 
 void timebase_init(void)
 {
-		timebase_10us = 0;
+		timebase_1ms = 0;
 }
 
-uint32_t get_timebase_10us(void)
+uint32_t get_timebase_1ms(void)
 {
-		return timebase_10us;
+		return timebase_1ms;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-		timebase_10us++;
-		TimeHandler();
+		timebase_1ms++;
 }
 
-void TimeHandler(void)
-{
-		TimerTick10us();
-		if(timebase_10us % 100 == 0)
-		{
-			TimerTick1ms();
-		}
-}
-
-void TimerTick10us(void)
-{
-		UART_Handler();
-}
-
-void TimerTick1ms(void)
-{
-	
-}

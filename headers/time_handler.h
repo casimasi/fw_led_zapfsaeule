@@ -5,9 +5,5 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 
-void TimeHandler(void);
-void TimerTick10us(void);
-void TimerTick100us(void);
-void TimerTick1ms(void);
-void TimerTick10ms(void);
-void TimerTick100ms(void);
+void timebase_init(void);
+uint32_t get_timebase_1ms(void);

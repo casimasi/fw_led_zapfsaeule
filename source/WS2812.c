@@ -33,20 +33,24 @@ void ws2812_set_dout_pin(bool b_State)
 
 void ws2812_bit_h_seq(void)
 {
+		__disable_irq();
 		ws2812_set_dout_pin(true);
 		for(volatile uint32_t u32_Delay = 0; u32_Delay < 10; u32_Delay++);   //T1H (0.8us) 
 
 		ws2812_set_dout_pin(false);
 		for(volatile uint32_t u32_Delay = 0; u32_Delay < 3; u32_Delay++);   //T1L (0.45us)
+		__enable_irq();
 }
 	
 void ws2812_bit_l_seq(void)
 {
+		__disable_irq();
 		ws2812_set_dout_pin(true);
 		for(volatile uint32_t u32_Delay = 0; u32_Delay < 2; u32_Delay++);   //T0H (0.4us)
 
 		ws2812_set_dout_pin(false);
 		for(volatile uint32_t u32_Delay = 0; u32_Delay < 11; u32_Delay++);   //T0L (0.85us)
+		__enable_irq();
 }
 
 void ws2812_set(uint32_t hexval)

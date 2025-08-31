@@ -25,9 +25,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 #include "uart_handler.h"
 #include "led_matrix.h"
+#include "time_handler.h"
+#include "light_handler.h"
+
 
 /* USER CODE END Includes */
 
@@ -96,37 +99,36 @@ int main(void)
   MX_TIM1_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
-	
+	HAL_TIM_Base_Start_IT(&htim1);
+	timebase_init();
 	UART_InitHandler();
 	matrix_init();
 	send_identification();
 	
-		/*write_single_led(0, 0, 0, 0, 50);
-		write_single_led(0, 1, 0, 0, 50);
-		write_single_led(0, 2, 0, 0, 50);
-		write_single_led(0, 3, 0, 0, 50);
-		write_single_led(0, 4, 0, 0, 50);
-		write_single_led(0, 5, 0, 40, 0);
-		write_single_led(0, 6, 0, 40, 0);
-		write_single_led(0, 7, 0, 40, 0);
-		write_single_led(0, 8, 0, 40, 0);
-		write_single_led(0, 9, 0, 40, 0);*/
-
-		//matrix_set_all();
+	uint32_t led_timer = get_timebase_1ms();
+	uint32_t light_timer = get_timebase_1ms();
+		
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
+	while (1)
+	{
+	/* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-		HAL_Delay(500);
-  }
+	/* USER CODE BEGIN 3 */
+		if ((get_timebase_1ms() - led_timer) > 500)
+		{
+				HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+				led_timer = get_timebase_1ms();
+		}
+		if ((get_timebase_1ms() - light_timer) > 10)
+		{
+				light_handler();
+				light_timer = get_timebase_1ms();
+		}
+	}
   /* USER CODE END 3 */
 }
 
